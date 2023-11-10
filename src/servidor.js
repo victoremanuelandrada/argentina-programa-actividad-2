@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParse = require('body-parser');
 const fileUpload = require('express-fileupload');
 
+const {database} = require('./config/sequelizeConfig.js');
 
 const usuarioRouter = require('./routers/UsuarioRouters.js');
 const AutenticacionRoutes = require('./routers/autenticacionRoutes.js');
@@ -27,8 +28,9 @@ app.use(usuarioRouter);
 app.use(AutenticacionRoutes);
 app.use(ArchivosRouter);
 app.use(georefRouter);
-app.use(EmailRouter);
+app.use(EmailRouter); 
 
 app.listen(PORT, () => {
   console.log(`servidor iniciado en el puerto: ${PORT}`);
+  database();
 })
