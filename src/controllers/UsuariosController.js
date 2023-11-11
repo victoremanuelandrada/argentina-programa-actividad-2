@@ -10,10 +10,14 @@ UsuariosController.verUsuarios = async (req, res)=>{
 
         return res.json(lista_usuarios);
     } catch(error){
-        return res.status(500).json({mensaje:'Ocurrio un error Interno', error: error});
+        return res.status(500).json({
+            mensaje:'Ocurrio un error Interno',
+             error: error}
+        );
 
     }
 }
+
 //ver usuario
 UsuariosController.verUsuario = (req, res)=>{
     //Fer un usuario en particular tarea
