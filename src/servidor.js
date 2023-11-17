@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParse = require('body-parser');
 const fileUpload = require('express-fileupload');
+const cors = require('cors');  
 
 const {database} = require('./config/sequelizeConfig.js');
 const conectarMongo = require('./config/MongooseConfig.js');
@@ -21,6 +22,7 @@ const PORT = 3000;
   res.send('Hola Mundo!');
 })*/
 //MiddleWare
+app.use(cors());
 app.use(bodyParse.json());
 app.use(fileUpload());
 
@@ -33,6 +35,6 @@ app.use(EmailRouter);
 
 app.listen(PORT, () => {
   console.log(`servidor iniciado en el puerto: ${PORT}`);
-  //database();//sequelize
-  conectarMongo();//mongodb
+  database();//sequelize
+  //conectarMongo();//mongodb
 })
