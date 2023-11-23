@@ -18,7 +18,7 @@ const {
 //ver usuarios
 usuarioRouter.get('/usuarios', verUsuarios);
 //ver usuario
-usuarioRouter.get('/usuario', verUsuario);
+usuarioRouter.get('/usuario/:id', verUsuario);
 //crear usuario
 usuarioRouter.post('/usuario', crearUsuario);
 //editar usuario

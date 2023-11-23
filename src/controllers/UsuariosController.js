@@ -19,10 +19,31 @@ UsuariosController.verUsuarios = async (req, res)=>{
 }
 
 //ver usuario
-UsuariosController.verUsuario = (req, res)=>{
-    //Fer un usuario en particular tarea
-    return res.json({ mensaje: 'Ruta: ver usuario'});
-}
+UsuariosController.verUsuario = async(req, res)=>{
+    
+    try {
+        
+        const { id }= req.params;
+
+        const usuaioEncontrado = await  UsuarioModel.findByPk(id);
+        if (usuaioEncontrado) {
+            return res.json(usuaioEncontrado);
+        }else{
+            return res.status(500).json({
+                error: 'Usuario no Encontrado.'
+            });
+        }
+        
+    } catch(error){
+            return res.status(500).json({
+                mensaje:'Ocurrio un error Interno',
+                error: error}
+            );
+        }
+       
+
+    }
+
 //crear usuario
 UsuariosController.crearUsuario =async (req, res)=>{
     try {
@@ -50,8 +71,39 @@ UsuariosController.crearUsuario =async (req, res)=>{
 }
 
 //editar usuario
-UsuariosController.editarUsuario = (req, res)=>{
-    return res.json({ mensaje: 'Ruta: crear usuario'});
+UsuariosController.editarUsuario = async (req, res)=>{
+    try {
+        const {id, nombres, apellidos}=req.body;
+
+        if (!nombres || !apellidos) {
+            return res.status(500).json({
+                error: 'Falta Campos.'
+            });
+        }
+
+        const Editarusuarios = await UsuarioModel.update({
+            nombres:nombres,
+            apellidos:apellidos,
+        },{
+            where: {
+                id:id,
+            }
+        })
+
+       //await nuevo_usuarios.save();
+        if (Editarusuarios) {
+            return res.json({mensaje: 'Usuario editar corectamente.'});
+        } else {
+            return res.status(500).json({error: 'Usuario no si pudo actualizar corectamente.'});
+        }  
+
+    }
+    catch(error){
+        return res.status(500).json({
+            mensaje:'Ocurrio un error Interno',
+             error: error}
+        );
+    }
 }
 
 //eliminar usuario
