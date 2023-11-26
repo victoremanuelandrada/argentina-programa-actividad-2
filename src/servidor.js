@@ -5,7 +5,7 @@ const bodyParse = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');  
 
-const {database} = require('./config/sequelizeConfig.js');
+//const {database} = require('./config/sequelizeConfig.js');
 const conectarMongo = require('./config/MongooseConfig.js');
 
 const usuarioRouter = require('./routers/UsuarioRouters.js');
@@ -35,6 +35,6 @@ app.use(EmailRouter);
 
 app.listen(PORT, () => {
   console.log(`servidor iniciado en el puerto: ${PORT}`);
-  database();//sequelize
-  //conectarMongo();//mongodb
+  //database();//sequelize
+  conectarMongo();//mongodb
 })

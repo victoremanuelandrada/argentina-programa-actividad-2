@@ -41,8 +41,10 @@ UsurioController.verUsuario = async (req, res)=>{
 //crear usuario
 UsurioController.crearUsuario = async (req, res)=>{
     try{
-        const {nombres, apellidos}= req.body;
+        const {usuario, contrasenia, nombres, apellidos}= req.body;
         const muevoUsuario = new UsuarioModel({
+            usuario: usuario,
+            contrasenia:contrasenia,
             nombres: nombres,
             apellidos: apellidos,
             });
@@ -62,12 +64,17 @@ UsurioController.crearUsuario = async (req, res)=>{
 //editar usuario
 UsurioController.editarUsuario = async (req, res)=>{
     try{
-        const {id, nombres, apellidos}= req.body;
+        const {id,usuario, contrasenia, nombres, apellidos}= req.body;
         
         await UsuarioModel.findByIdAndUpdate(
             
                 id,
-                 {nombres: nombres,apellidos: apellidos });
+                 {
+                    usuario: usuario,
+                    contrasenia:contrasenia,
+                    nombres: nombres,
+                    apellidos: apellidos
+                 });
             
         return res.json({ mensaje: ' usuario actualizado con exito'});
     } catch (error){

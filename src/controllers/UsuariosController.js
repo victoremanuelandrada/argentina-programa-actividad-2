@@ -25,7 +25,7 @@ UsuariosController.verUsuario = async(req, res)=>{
         
         const { id }= req.params;
 
-        const usuaioEncontrado = await  UsuarioModel.findByPk(id);
+        const usuaioEncontrado = await  UsuarioModel.findById(id);
         if (usuaioEncontrado) {
             return res.json(usuaioEncontrado);
         }else{
